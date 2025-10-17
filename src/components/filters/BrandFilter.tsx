@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { BRANDS } from '@/lib/constants';
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { MagnifyingGlassIcon } from '@/components/ui/Icons';
 
 interface BrandFilterProps {
   selectedBrands: string[];

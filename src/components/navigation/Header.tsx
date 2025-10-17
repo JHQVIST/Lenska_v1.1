@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, XMarkIcon } from '@/components/ui/Icons';
 import { MegaMenu } from './MegaMenu';
 import { SearchBar } from '../ui/SearchBar';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { XMarkIcon } from '@heroicons/react/24/solid';
+import { XMarkIcon } from '@/components/ui/Icons';
 
 interface FilterChipProps {
   label: string;
