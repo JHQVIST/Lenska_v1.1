@@ -5,8 +5,13 @@ import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
 import { ProductDetails } from '@/components/products/ProductDetails';
 
-export default async function ProductPage({ params }: { params: { id: string } }) {
-  const product = await getProductById(params.id);
+interface ProductPageProps {
+  params: Promise<{ id: string }>;
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params;
+  const product = await getProductById(id);
 
   if (!product) {
     notFound();
