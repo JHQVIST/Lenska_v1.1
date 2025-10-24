@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon } from '@/components/ui/Icons';
 import { MegaMenu } from './MegaMenu';
-import { SearchBar } from '../ui/SearchBar';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -24,16 +23,18 @@ export function Header() {
             <span className="text-xl font-bold text-gray-900">Lenska</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-6">
-            <MegaMenu />
-            <Link href="/black-friday" className="flex items-center space-x-1 text-orange-600 font-semibold hover:text-orange-700">
-              <span>🔥</span>
-              <span>Black Friday</span>
-            </Link>
-            <Link href="/sale" className="text-gray-700 hover:text-gray-900 font-medium">
-              Sale
-            </Link>
+          {/* Centered Desktop Navigation */}
+          <nav className="hidden md:flex items-center justify-center flex-1">
+            <div className="flex items-center space-x-6">
+              <MegaMenu />
+              <Link href="/black-friday" className="flex items-center space-x-1 text-orange-600 font-semibold hover:text-orange-700">
+                <span>🔥</span>
+                <span>Black Friday</span>
+              </Link>
+              <Link href="/sale" className="text-gray-700 hover:text-gray-900 font-medium">
+                Sale
+              </Link>
+            </div>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -47,11 +48,6 @@ export function Header() {
               <Bars3Icon className="h-6 w-6" />
             )}
           </button>
-        </div>
-
-        {/* Search Bar - Below header on mobile, inline on desktop */}
-        <div className="pb-4 md:hidden">
-          <SearchBar />
         </div>
       </div>
 

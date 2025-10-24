@@ -30,7 +30,18 @@ export default async function HomePage() {
               className="object-cover opacity-40"
               priority
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-blue-700/80"></div>
+            {/* 
+              🎨 COLOR OVERLAY - CHANGE COLORS HERE:
+              Change "from-blue-900" and "to-blue-700" to any Tailwind color
+              Examples:
+              - Red: from-red-900 to-red-700
+              - Green: from-green-900 to-green-700
+              - Purple: from-purple-900 to-purple-700
+              - Gray: from-gray-900 to-gray-700
+              
+              Change "opacity-100" to control transparency (0-100)
+            */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-100"></div>
           </div>
 
           {/* Content */}
@@ -43,9 +54,11 @@ export default async function HomePage() {
                 Compare prices on camera equipment across leading retailers
               </p>
 
-              {/* Search Bar */}
-              <div className="max-w-3xl mx-auto mb-8">
-                <SearchBar />
+              {/* Search Bar - CENTERED */}
+              <div className="flex justify-center mb-8">
+                <div className="w-full max-w-3xl">
+                  <SearchBar />
+                </div>
               </div>
 
               {/* Stats */}
@@ -56,10 +69,10 @@ export default async function HomePage() {
                 Tracking thousands of products across multiple retailers
               </div>
 
-              {/* Popular Searches - FIXED ALIGNMENT */}
+              {/* Popular Searches - CENTERED */}
               <div className="flex flex-wrap items-center justify-center gap-2">
                 <span className="text-blue-100 text-sm font-medium">Popular searches:</span>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap justify-center gap-2">
                   {POPULAR_SEARCHES.map((search) => (
                     <Link
                       key={search}
