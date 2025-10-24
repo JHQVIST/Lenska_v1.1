@@ -41,7 +41,7 @@ export default async function HomePage() {
               
               Change "opacity-100" to control transparency (0-100)
             */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-100"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900 to-blue-700 opacity-0"></div>
           </div>
 
           {/* Content */}
