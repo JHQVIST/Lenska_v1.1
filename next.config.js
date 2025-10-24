@@ -10,14 +10,7 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-    domains: ['images.unsplash.com', 'example.com'],
     unoptimized: true,
-  },
-  // Ensure public folder is included in build
-  experimental: {
-    outputFileTracingIncludes: {
-      '/': ['./public/**/*'],
-    },
   },
 }
 
