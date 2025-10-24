@@ -9,6 +9,7 @@ import { ProductGrid } from '@/components/products/ProductGrid';
 import { useFilters } from '@/hooks/useFilters';
 import { useProducts } from '@/hooks/useProducts';
 import { Product } from '@/types/product';
+import { FilterState } from '@/types/filter';
 import { CATEGORIES } from '@/lib/constants';
 
 export default function CategoryPage() {
@@ -44,7 +45,7 @@ export default function CategoryPage() {
         <main className="flex-1 flex items-center justify-center">
           <div className="text-center">
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Category not found</h1>
-            <p className="text-gray-600">The category you're looking for doesn't exist.</p>
+            <p className="text-gray-600">{"The category you're looking for doesn't exist."}</p>
           </div>
         </main>
         <Footer />
@@ -95,7 +96,7 @@ export default function CategoryPage() {
                 </p>
                 <select
                   value={filters.sortBy}
-                  onChange={(e) => updateFilters({ sortBy: e.target.value as any })}
+                  onChange={(e) => updateFilters({ sortBy: e.target.value as FilterState['sortBy'] })}
                   className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
                   <option value="popularity">Sort by Popularity</option>

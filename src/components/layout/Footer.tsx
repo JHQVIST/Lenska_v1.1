@@ -21,7 +21,7 @@ export function Footer() {
               <span className="ml-2 text-xl font-bold">Lenska</span>
             </div>
             <p className="text-gray-400 mb-4 text-sm">
-              Sweden's leading camera price comparison platform. Find the best deals on photography equipment from trusted retailers.
+              {"Sweden's leading camera price comparison platform. Find the best deals on photography equipment from trusted retailers"}.
             </p>
             <div className="flex space-x-4">
               <a href="https://facebook.com" className="text-gray-400 hover:text-white transition-colors">

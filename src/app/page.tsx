@@ -138,7 +138,7 @@ export default async function HomePage() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2">1. Search</h3>
-                <p className="text-gray-600">Find the camera or equipment you're looking for</p>
+                <p className="text-gray-600">{"Find the camera or equipment you're looking for"}</p>
               </div>
               <div className="text-center">
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">

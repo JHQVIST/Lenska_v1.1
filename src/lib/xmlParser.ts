@@ -3,6 +3,18 @@ import { Product } from '@/types/product';
 import fs from 'fs/promises';
 import path from 'path';
 
+interface XMLItem {
+  [key: string]: string[] | undefined;
+}
+
+interface XMLResult {
+  rss?: {
+    channel?: Array<{
+      item?: XMLItem[];
+    }>;
+  };
+}
+
 export async function parseProductFeed(): Promise<Product[]> {
   try {
     // Try to read from ProductFeed/current directory first
@@ -14,13 +26,18 @@ export async function parseProductFeed(): Promise<Product[]> {
     } catch {
       // Fallback to root directory
       xmlPath = path.join(process.cwd(), 'product_feed.xml');
-      xmlContent = await fs.readFile(xmlPath, 'utf-8');
+      try {
+        xmlContent = await fs.readFile(xmlPath, 'utf-8');
+      } catch {
+        console.warn('No product feed found, returning empty array');
+        return [];
+      }
     }
 
-    const result = await parseStringPromise(xmlContent);
+    const result: XMLResult = await parseStringPromise(xmlContent);
     const items = result.rss?.channel?.[0]?.item || [];
 
-    const products: Product[] = items.map((item: any, index: number) => {
+    const products: Product[] = items.map((item: XMLItem, index: number) => {
       const getField = (field: string) => item[field]?.[0] || '';
       const getPrice = (priceStr: string) => {
         const cleanPrice = priceStr.replace(/[^0-9.]/g, '');
