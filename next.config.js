@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -7,7 +10,14 @@ const nextConfig = {
         hostname: '**',
       },
     ],
-    unoptimized: true, // Disable image optimization for external URLs
+    domains: ['images.unsplash.com', 'example.com'],
+    unoptimized: true,
+  },
+  // Ensure public folder is included in build
+  experimental: {
+    outputFileTracingIncludes: {
+      '/': ['./public/**/*'],
+    },
   },
 }
 

@@ -17,22 +17,35 @@ interface XMLResult {
 
 export async function parseProductFeed(): Promise<Product[]> {
   try {
-    // Try to read from ProductFeed/current directory first
-    let xmlPath = path.join(process.cwd(), 'ProductFeed', 'current', 'product_feed.xml');
-    let xmlContent: string;
+    // List of paths to try in order (your feed is in ProductFeed/Current)
+    const pathsToTry = [
+      path.join(process.cwd(), 'ProductFeed', 'Current', 'product_feed.xml'),
+      path.join(process.cwd(), 'public', 'ProductFeed', 'Current', 'product_feed.xml'),
+      path.join(process.cwd(), 'public', 'product_feed.xml'),
+      path.join(process.cwd(), 'product_feed.xml'),
+    ];
 
-    try {
-      xmlContent = await fs.readFile(xmlPath, 'utf-8');
-    } catch {
-      // Fallback to root directory
-      xmlPath = path.join(process.cwd(), 'product_feed.xml');
+    let xmlContent: string | null = null;
+    let successPath = '';
+
+    // Try each path until we find the file
+    for (const xmlPath of pathsToTry) {
       try {
         xmlContent = await fs.readFile(xmlPath, 'utf-8');
-      } catch {
-        console.warn('No product feed found, returning empty array');
-        return [];
+        successPath = xmlPath;
+        break;
+      } catch (error) {
+        // Continue to next path
+        continue;
       }
     }
+
+    if (!xmlContent) {
+      console.error('No product feed found in any location. Tried:', pathsToTry);
+      return [];
+    }
+
+    console.log(`✅ Successfully loaded product feed from: ${successPath}`);
 
     const result: XMLResult = await parseStringPromise(xmlContent);
     const items = result.rss?.channel?.[0]?.item || [];
@@ -62,9 +75,10 @@ export async function parseProductFeed(): Promise<Product[]> {
       };
     });
 
+    console.log(`✅ Successfully parsed ${products.length} products`);
     return products;
   } catch (error) {
-    console.error('Error parsing product feed:', error);
+    console.error('❌ Error parsing product feed:', error);
     return [];
   }
 }
