@@ -6,7 +6,6 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    // In Next.js 15, params is a Promise
     const { id } = await params;
     const product = await getProductById(id);
 
