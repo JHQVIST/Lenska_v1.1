@@ -1,7 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { getProductById, parseProductFeed } from '@/lib/xmlParser';
+import { getProductById, getAllProducts } from '@/lib/productService';
 import { generateMockOffers, generatePriceHistory, generateSpecifications } from '@/lib/mockData';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -31,7 +31,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const specifications = generateSpecifications(product.title);
   
   // Get similar products
-  const allProducts = await parseProductFeed();
+  const allProducts = await getAllProducts(100);
   const similarProducts = allProducts
     .filter(p => p.id !== product.id && p.brand === product.brand)
     .slice(0, 3);

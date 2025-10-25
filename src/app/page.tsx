@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { parseProductFeed } from '@/lib/xmlParser';
+import { getAllProducts } from '@/lib/productService';
 import { CATEGORIES, POPULAR_SEARCHES } from '@/lib/constants';
 import { Header } from '@/components/navigation/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -11,8 +11,7 @@ import { ProductCard } from '@/components/products/ProductCard';
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const allProducts = await parseProductFeed();
-  const featuredProducts = allProducts.slice(0, 6);
+  const featuredProducts = await getAllProducts(8, 0);
 
   return (
     <div className="min-h-screen flex flex-col">
