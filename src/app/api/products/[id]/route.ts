@@ -3,10 +3,11 @@ import { getProductById } from '@/lib/productService';
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    // In Next.js 15, params is a Promise
+    const { id } = await params;
     const product = await getProductById(id);
 
     if (!product) {
