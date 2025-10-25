@@ -40,7 +40,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const savingsAmount = highestPrice - lowestPrice;
   const savingsPercent = ((savingsAmount / highestPrice) * 100).toFixed(0);
 
-  const [imageError, setImageError] = React.useState(false);
+  // Check if image URL is valid (server-side)
   const isValidImageUrl = product.image_link && 
     !product.image_link.includes('drive.google.com') &&
     (product.image_link.startsWith('http://') || product.image_link.startsWith('https://'));
@@ -98,7 +98,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                       <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
                       <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z" />
                     </svg>
-                    <span>Free Shipping</span>
+                    <span>Fast Shipping</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <svg className="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
