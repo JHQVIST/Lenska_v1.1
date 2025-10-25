@@ -15,17 +15,41 @@ export interface Product {
   product_type?: string;
 }
 
-export interface ProductWithRetailers extends Product {
-  retailers: Retailer[];
+// Simplified: Just "in stock" - matches real merchant feeds
+export interface MerchantOffer {
+  merchantId: string;
+  merchantName: string;
+  merchantLogo?: string;
+  price: number;
+  currency: string;
+  shipping: number;
+  shippingInfo: string;
+  availability: string; // Will be "in stock" from feeds
+  deliveryTime: string;
+  rating: number;
+  reviewCount: number;
+  url: string;
+  lastUpdated: string;
+}
+
+export interface ProductWithOffers extends Product {
+  offers: MerchantOffer[];
   lowestPrice: number;
   highestPrice: number;
   averagePrice: number;
+  priceHistory?: PricePoint[];
+  specifications?: ProductSpecification[];
+  similarProducts?: Product[];
 }
 
-export interface Retailer {
-  name: string;
+export interface PricePoint {
+  date: string;
   price: number;
-  url: string;
-  availability: string;
-  shipping?: number;
+  merchant: string;
+}
+
+export interface ProductSpecification {
+  name: string;
+  value: string;
+  category?: string;
 }
