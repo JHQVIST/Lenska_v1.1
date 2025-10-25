@@ -1,18 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { getProductById } from '@/lib/productService';
 
-type RouteContext = {
-  params: Promise<{
-    id: string;
-  }>;
-};
-
 export async function GET(
-  request: NextRequest,
-  context: RouteContext
+  request: Request,
+  context: { params: { id: string } }
 ) {
   try {
-    const { id } = await context.params;
+    const id = context.params.id;
     const product = await getProductById(id);
 
     if (!product) {
