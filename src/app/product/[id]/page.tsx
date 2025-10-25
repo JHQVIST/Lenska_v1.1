@@ -11,6 +11,7 @@ import { PriceHistoryChart } from '@/components/products/PriceHistoryChart';
 import { ProductSpecifications } from '@/components/products/ProductSpecifications';
 import { SimilarProducts } from '@/components/products/SimilarProducts';
 import { formatPrice } from '@/lib/utils';
+import { CATEGORIES } from '@/lib/constants';
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
@@ -45,6 +46,28 @@ export default async function ProductPage({ params }: ProductPageProps) {
     !product.image_link.includes('drive.google.com') &&
     (product.image_link.startsWith('http://') || product.image_link.startsWith('https://'));
 
+  // Find matching category for breadcrumbs
+  const matchingCategory = CATEGORIES.find(cat => 
+    product.product_type?.toLowerCase().includes(cat.name.toLowerCase()) ||
+    product.title.toLowerCase().includes(cat.name.toLowerCase())
+  );
+
+  // Build breadcrumb items
+  const breadcrumbItems = [];
+  
+  // Add category if found
+  if (matchingCategory) {
+    breadcrumbItems.push({
+      label: matchingCategory.name,
+      href: `/${matchingCategory.slug}`
+    });
+  }
+  
+  // Add product title (no link)
+  breadcrumbItems.push({
+    label: product.title
+  });
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -52,14 +75,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <main className="flex-1 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 py-8">
           {/* Breadcrumbs */}
-          <Breadcrumbs
-            items={[
-              { label: product.product_type || 'Products', href: '/products' },
-              { label: product.brand, href: `/brand/${product.brand.toLowerCase()}` },
-              { label: product.title },
-            ]}
-          />
+          <Breadcrumbs items={breadcrumbItems} />
 
+          {/* Rest of the product page remains the same... */}
           {/* Product Header */}
           <div className="bg-white rounded-lg border border-gray-200 p-8 mb-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
