@@ -3,10 +3,10 @@ import { getProductById } from '@/lib/productService';
 
 export async function GET(
   request: Request,
-  context: { params: { id: string } }
+  { params }: { params: { id: string } }
 ) {
   try {
-    const id = context.params.id;
+    const { id } = params;
     const product = await getProductById(id);
 
     if (!product) {
