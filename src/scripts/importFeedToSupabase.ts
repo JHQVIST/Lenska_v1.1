@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { parseProductFeed } from '../lib/xmlParser';
 import { bulkInsertProducts, getMerchantByMerchantId, bulkInsertProductOffers } from '../lib/database';
 import { DbProduct, DbProductOffer } from '../lib/database';
@@ -6,6 +7,16 @@ import { DbProduct, DbProductOffer } from '../lib/database';
  * Import products from XML feed to Supabase
  */
 export async function importFeedToSupabase() {
+  // Check env variables exist
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  if (!supabaseUrl || !supabaseKey) {
+    console.error('❌ Error: Supabase credentials not found!');
+    console.error('Make sure NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are in your .env.local');
+    process.exit(1);
+  }
+
   console.log('🚀 Starting feed import to Supabase...');
 
   try {

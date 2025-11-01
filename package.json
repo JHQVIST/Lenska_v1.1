@@ -8,11 +8,12 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
-    "import-feed": "ts-node --project tsconfig.json src/scripts/importFeedToSupabase.ts"
+    "import-feed": "tsx src/scripts/importFeedToSupabase.ts"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
     "@supabase/supabase-js": "^2.76.1",
+    "dotenv": "^17.2.3",
     "next": "15.5.6",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -29,6 +30,7 @@
     "eslint-config-next": "15.5.6",
     "postcss": "^8.4.31",
     "tailwindcss": "^3.4.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.3.2"
   }
 }
